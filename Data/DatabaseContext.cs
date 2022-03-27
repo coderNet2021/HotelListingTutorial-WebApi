@@ -1,9 +1,14 @@
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace HotelListing.Data
 {
-    public class DatabaseContext : DbContext
+    public class DatabaseContext : IdentityDbContext<ApiUser>
     {
+        // public DatabaseContext()
+        // {
+        // }
+
         public DatabaseContext( DbContextOptions options) : base(options)
         {
         }
@@ -14,6 +19,9 @@ namespace HotelListing.Data
 
 
          protected override void OnModelCreating(ModelBuilder builder){
+
+             base.OnModelCreating(builder);
+
             builder.Entity<Country>().HasData(
                 new Country{
                     Id=1,
